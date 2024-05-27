@@ -10,6 +10,10 @@
   "author": "Krishna Magar",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "joi": "^17.13.1",
+    "joi-password-complexity": "^5.2.0",
     "mongodb": "^6.6.2",
     "mongoose": "^8.4.0"
   }

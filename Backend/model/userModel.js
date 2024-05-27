@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const { TimeStamp } = require('mongodb')
+const joi = require('joi')
+const passwordComplexity = require('joi-password-complexity')
 
 const userSchema = mongoose.Schema(
   {
@@ -7,9 +9,13 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please enter username'],
     },
-    name: {
+    firstname: {
       type: String,
-      required: [true, 'Please enter your name'],
+      required: [true, 'Please enter your first name'],
+    },
+    lastname: {
+      type: String,
+      required: [true, 'Please enter your last name'],
     },
     email: {
       type: String,
@@ -33,4 +39,19 @@ const userSchema = mongoose.Schema(
   }
 )
 
-module.exports = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema)
+
+const validate = (data) => {
+  const schema = joi.object({
+    firstname: joi.string().required().label('First Name'),
+    lastname: joi.string().required().label('Last Name'),
+    email: joi.string().required().label('Email'),
+    address: joi.string().required().label('Address'),
+    username: joi.string().required().label('Username'),
+    phone: joi.number().required().label('Phone Number'),
+    password: passwordComplexity().required().label('Password'),
+  })
+  return schema.validate(data)
+}
+
+module.exports = { User, validate }
