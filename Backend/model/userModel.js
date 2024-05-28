@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
-const { TimeStamp } = require('mongodb')
 const joi = require('joi')
 const passwordComplexity = require('joi-password-complexity')
+const { Timestamp } = require('mongodb')
+const jwt = require('jsonwebtoken')
 
 const userSchema = mongoose.Schema(
   {
@@ -35,9 +36,16 @@ const userSchema = mongoose.Schema(
     },
   },
   {
-    TimeStamp: true,
+    timestamps: true,
   }
 )
+
+userSchema.methods.generateToken = function () {
+  const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
+    expiresIn: '7d',
+  })
+  return token
+}
 
 const User = mongoose.model('User', userSchema)
 
