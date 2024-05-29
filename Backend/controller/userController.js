@@ -61,4 +61,11 @@ const loginEmail = asyncHandler(async (req, res) => {
   }
 })
 
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.email
+  if (!email) {
+    return res.status(400).send({ message: 'Email is required' })
+  }
+})
+
 module.exports = { getUsers, registerUser, loginUsername, loginEmail }
