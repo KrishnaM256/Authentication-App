@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8000
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api/users', require('./routes/userRoutes'))
+app.use('api/verify', require('./routes/verify'))
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`)
