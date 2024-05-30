@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-const sendMail = async ({ email, subject, text }) => {
+const sendEmail = async ({ email, subject, text }) => {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -18,7 +18,7 @@ const sendMail = async ({ email, subject, text }) => {
       subject: subject,
       text: text,
     }
-    await transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         return res.status(400).send({ error: 'Failed to send email' })
       } else {
@@ -29,3 +29,5 @@ const sendMail = async ({ email, subject, text }) => {
     return err
   }
 }
+
+module.exports = { sendEmail }
