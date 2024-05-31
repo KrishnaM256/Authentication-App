@@ -72,9 +72,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
     return res.status(404).send({ message: 'User does not exist' })
   }
   const token = jwt.sign({ id: user._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: '1d',
+    expiresIn: '5m',
   })
-  const subject = 'Reset Password'
+  const subject = 'Reset Password link expires in 5 minute'
   const encodedToken = encodeURIComponent(token).replace(/\./g, '%2E')
   const text = `https://localhost:5173/reset_password/${encodedToken}`
   try {
@@ -88,7 +88,6 @@ const forgotPassword = asyncHandler(async (req, res) => {
 const resetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body
   const { token } = req.params
-  console.log(token)
   if (!password) {
     return res.status(500).send({ message: 'Please enter reset password' })
   }
@@ -101,6 +100,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   const id = decodedToken.id
   const hashedPassword = await bcrypt.hash(password, 10)
   await User.findByIdAndUpdate({ _id: id }, { password: hashedPassword })
+
   return res.json({ status: true, message: 'Password updated successfully' })
 })
 

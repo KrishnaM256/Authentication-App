@@ -1,0 +1,48 @@
+.inputbox {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.formbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.inputbox input {
+  background: burlywood;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0 35px 0 5px;
+  color: black;
+}
+
+.inputbox label {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+input:focus ~ label {
+  top: -1.5rem; /* Adjust this value based on your design */
+  left: 5px;
+}
+
+#registerForm {
+  position: relative;
+  width: 400px;
+  height: 35rem;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2rem;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
