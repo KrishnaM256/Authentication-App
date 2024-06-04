@@ -10,18 +10,21 @@ function RegisterForm() {
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [password, setPassword] = useState('')
+  // const navigate = useNavigat
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/users/register', {
-      firstName,
-      lastName,
-      phone,
-      email,
-      address,
-      city,
-      password,
-    })
+    axios
+      .post('http://localhost:8000/api/users/register', {
+        firstName,
+        lastName,
+        phone,
+        email,
+        address,
+        city,
+        password,
+      })
+      .then((res) => {})
   }
 
   return (
