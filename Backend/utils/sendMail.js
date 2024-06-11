@@ -18,13 +18,7 @@ const sendEmail = async ({ email, subject, text }) => {
       subject: subject,
       text: text,
     }
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return res.status(400).send({ error: 'Failed to send email' })
-      } else {
-        return res.send({ message: 'Email sent successfully' })
-      }
-    })
+    await transporter.sendMail(mailOptions)
   } catch (err) {
     return err
   }
